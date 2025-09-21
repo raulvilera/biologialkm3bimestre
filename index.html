@@ -67,12 +67,19 @@
         }
         
         select, input {
-            width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 0.95em;
             background-color: white;
+            min-width: 50px;
+            width: 100%;
+        }
+        
+        /* Ajuste para o campo de nome se expandir conforme o conteúdo */
+        #student-name {
+            width: auto;
+            min-width: 250px;
         }
         
         select {
@@ -259,6 +266,11 @@
             
             button {
                 width: 100%;
+            }
+            
+            #student-name {
+                width: 100%;
+                min-width: unset;
             }
         }
     </style>
@@ -511,7 +523,7 @@
                     "Redução da luminosidade, o que os impede de enxergar."
                 ],
                 correct: 3,
-                feedback: "Na eutrofização, a decomposição da matéria orgânica consome oxigênio dissolvido na água, criando zonas anóxicas. Os peixes nadam próximo à superfície para acessar oxigênio atmosférico na interface água-ar."
+                feedback: "Na eutrofização, a decomposição da matéria orgânica consome oxigênio dissolvido na água, créando zonas anóxicas. Os peixes nadam próximo à superfície para acessar oxigênio atmosférico na interface água-ar."
             }
         ];
 
@@ -548,6 +560,9 @@
             document.getElementById('student-name').addEventListener('change', handleStudentSelection);
             document.getElementById('submit-btn').addEventListener('click', handleSubmit);
             document.getElementById('reset-btn').addEventListener('click', handleReset);
+            
+            // Ajustar o tamanho do dropdown de alunos
+            adjustSelectWidth();
         }
 
         // Função para exibir questões na página
@@ -577,6 +592,36 @@
             });
         }
 
+        // Ajustar a largura do select baseado no conteúdo
+        function adjustSelectWidth() {
+            const select = document.getElementById('student-name');
+            const tempSelect = document.createElement('select');
+            const tempOption = document.createElement('option');
+            
+            // Adicionar a opção mais longa para medir
+            let longestText = '';
+            students.forEach(student => {
+                if (student.name.length > longestText.length) {
+                    longestText = student.name;
+                }
+            });
+            
+            tempOption.textContent = longestText;
+            tempSelect.appendChild(tempOption);
+            
+            // Estilizar o select temporário igual ao original
+            tempSelect.style.position = 'absolute';
+            tempSelect.style.visibility = 'hidden';
+            tempSelect.style.font = getComputedStyle(select).font;
+            document.body.appendChild(tempSelect);
+            
+            // Ajustar a largura do select original
+            select.style.width = `${tempSelect.scrollWidth + 30}px`;
+            
+            // Remover o select temporário
+            document.body.removeChild(tempSelect);
+        }
+
         // Manipular seleção de aluno
         function handleStudentSelection(event) {
             const value = event.target.value;
@@ -589,32 +634,7 @@
                 
                 document.getElementById('student-number').value = student.number;
                 document.getElementById('student-email').value = student.email;
-                
-                // Ajustar automaticamente o tamanho dos campos
-                setTimeout(() => {
-                    adjustInputSizes();
-                }, 100);
             }
-        }
-
-        // Ajustar o tamanho dos campos de entrada
-        function adjustInputSizes() {
-            const inputs = document.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                // Criar um elemento temporário para medir o texto
-                const temp = document.createElement('span');
-                temp.style.visibility = 'hidden';
-                temp.style.whiteSpace = 'pre';
-                temp.style.font = getComputedStyle(input).font;
-                temp.textContent = input.value || input.textContent;
-                
-                document.body.appendChild(temp);
-                const width = temp.getBoundingClientRect().width + 20; // Adicionar margem
-                document.body.removeChild(temp);
-                
-                // Aplicar a largura calculada
-                input.style.width = `${Math.max(100, width)}px`;
-            });
         }
 
         // Manipular envio das respostas
@@ -770,10 +790,6 @@
 
         // Inicializar a atividade quando o documento estiver carregado
         document.addEventListener('DOMContentLoaded', initActivity);
-        
-        // Ajustar o tamanho dos campos quando a página carregar
-        window.addEventListener('load', adjustInputSizes);
     </script>
 </body>
 </html>
-
