@@ -101,14 +101,27 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
         }
         
         .alternative:hover {
             background-color: rgba(255, 255, 255, 0.3);
         }
         
+        .alternative-letter {
+            font-weight: bold;
+            margin-right: 8px;
+            min-width: 20px;
+        }
+        
         .alternative input {
-            margin-right: 10px;
+            margin: 0 10px 0 0;
+            width: auto;
+        }
+        
+        .alternative-text {
+            flex: 1;
         }
         
         .buttons {
@@ -269,11 +282,11 @@
             {number: 84, name: "CAMILA APPOLINÁRIO", email: "00001122096380SP@al.educacao.sp.gov.br"}
         ];
 
-        // Banco de questões (50 no total)
+        // Banco de questões (10 para exemplo)
         const questions = [
             {
                 id: 1,
-                question: "No Jogo dos Quatis, os estudantes simularam a variação populacional de quatis ao longo de gerações, considerando eventos ambientais. Na 3ª geração, calor e chuva prolongadas aumentaram a população de sapos, que se alimentam de insetos frugívoros. Considerando que os quatis se alimentam de sapos e insetos, qual foi o impacto na população de quatis e por quê?",
+                question: "No Jogo dos Quatis, os estudantes simularam a variação populacional de quatis ao longo de gerações, considerando eventos ambiental. Na 3ª geração, calor e chuva prolongadas aumentaram a população de sapos, que se alimentam de insetos frugívoros. Considerando que os quatis se alimentam de sapos e insetos, qual foi o impacto na população de quatis e por quê?",
                 alternatives: [
                     "Aumento de 1 indivíduo, porque houve aumento na disponibilidade de alimento para os quatis.",
                     "Diminuição de 1 indivíduo, porque os sapos competem com os quatis pelos insetos.",
@@ -303,7 +316,7 @@
                 alternatives: [
                     "Os fertilizantes inorgânicos aumentam a taxa de desnitrificação, liberando N₂ para a atmosfera.",
                     "O excesso de nitrogênio no solo é lixiviado para corpos d'água, causando eutrofização.",
-                    "Os fertilizantes orgânicos seriam mais adequados porque não alteram o pH do solo.",
+                    "Os fertilizantes orgânicos serían mais adequados porque não alteram o pH do solo.",
                     "A amonificação realizada por bactérias é inibida por fertilizantes inorgânicos.",
                     "O nitrogênio inorgânico não é absorvido pelas plantas, acumulando-se no solo."
                 ],
@@ -401,7 +414,6 @@
                 correct: 3,
                 feedback: "Na eutrofização, a decomposição da matéria orgânica consome oxigênio dissolvido na água, criando zonas anóxicas. Os peixes nadam próximo à superfície para acessar oxigênio atmosférico na interface água-ar."
             }
-            // Adicione as outras 40 questões aqui seguindo o mesmo padrão
         ];
 
         // Variáveis globais
@@ -460,8 +472,9 @@
                     <div class="alternatives">
                         ${shuffledAlternatives.map((alt, altIndex) => `
                             <label class="alternative">
+                                <span class="alternative-letter">${String.fromCharCode(65 + altIndex)})</span>
                                 <input type="radio" name="question-${question.id}" value="${altIndex}">
-                                ${alt}
+                                <span class="alternative-text">${alt}</span>
                             </label>
                         `).join('')}
                     </div>
