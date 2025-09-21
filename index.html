@@ -139,27 +139,192 @@
 
   <script>
     const students = [
-      {number: 1, name: "ALEXANDRE BATISTA DOS SANTOS", email: "00001141439785SP@al.educacao.sp.gov.br"},
-      {number: 5, name: "ANA LÍVIA BRAGA DOS SANTOS", email: "00001122248246SP@al.educacao.sp.gov.br"}
-      // (...adicione os outros nomes)
-    ];
+        // Dados dos alunos
+        const students = [
+            {number: 1, name: "ALEXANDRE BATISTA DOS SANTOS", email: "00001141439785SP@al.educacao.sp.gov.br"},
+            {number: 5, name: "ANA LÍVIA BRAGA DOS SANTOS", email: "00001122248246SP@al.educacao.sp.gov.br"},
+            {number: 7, name: "ARTHUR CASTRO SILVA", email: "00001122238228SP@al.educacao.sp.gov.br"},
+            {number: 11, name: "DANIELLE OLIVEIRA DA SILVA NUNES", email: "00001122096756SP@al.educacao.sp.gov.br"},
+            {number: 14, name: "ELOYSA ANDRADE OLIVEIRA SILVA", email: "00001103565242SP@al.educacao.sp.gov.br"},
+            {number: 18, name: "FELIPE MARCONDES SILVA", email: "0000112225538XSP@al.educacao.sp.gov.br"},
+            {number: 19, name: "GEOVANA FERREIRA DA SILVA SOUZA", email: "00001111268939SP@al.educacao.sp.gov.br"},
+            {number: 20, name: "GEOVANNA GABRIELA PIERRE SILVA", email: "00001122198954SP@al.educacao.sp.gov.br"},
+            {number: 24, name: "ISAAK ALVAREZ MARQUEZ CAETANO", email: "00001141664471SP@al.educacao.sp.gov.br"},
+            {number: 30, name: "KAMILA NEVES BRITO", email: "00001122109829SP@al.educacao.sp.gov.br"},
+            {number: 33, name: "KEMILLY VITORIA RODRIGUES MARIANO", email: "00001122119781SP@al.educacao.sp.gov.br"},
+            {number: 34, name: "LAURA LUIZA DOS SANTOS ALMEIDA", email: "00001141686442SP@al.educacao.sp.gov.br"},
+            {number: 37, name: "MARIA EDUARDA VENCESLAU DE SOUZA", email: "00001123918867SP@al.educacao.sp.gov.br"},
+            {number: 38, name: "MATHEUS CAVALCANTE LISBOA", email: "00001122175759SP@al.educacao.sp.gov.br"},
+            {number: 40, name: "MURILLO SOUZA RODRIGUES DOS SANTOS", email: "00001122296228SP@al.educacao.sp.gov.br"},
+            {number: 45, name: "PEDRO HENRIQUE MAURICIO DA SILVA CHAGAS", email: "00001140937571SP@al.educacao.sp.gov.br"},
+            {number: 48, name: "RHUAN LIMA OLIVEIRA", email: "00001122272169SP@al.educacao.sp.gov.br"},
+            {number: 49, name: "THAINA FIDELIS XAVIER DA SILVA", email: "00001122229148SP@al.educacao.sp.gov.br"},
+            {number: 54, name: "DENIS CASTRO DURVALDO", email: "00001132474152SP@al.educacao.sp.gov.br"},
+            {number: 56, name: "ISAAC LEMOS SANTOS", email: "00001141548744SP@al.educacao.sp.gov.br"},
+            {number: 57, name: "EMILLY EDUARDA BONIFACIO DE AMORIM CORREA", email: "00001141568111SP@al.educacao.sp.gov.br"},
+            {number: 58, name: "RAYSSA GUBEREV FRAGA", email: "00001114029373SP@al.educacao.sp.gov.br"},
+            {number: 59, name: "LEONARDO ABADE DA SILVA DANTAS", email: "0000114154104XSP@al.educacao.sp.gov.br"},
+            {number: 61, name: "MILLENA CRISTINA LOPES DE CARVALHO", email: "00001122201436SP@al.educacao.sp.gov.br"},
+            {number: 62, name: "PYETRA GOMES MARTINS", email: "00001141681717SP@al.educacao.sp.gov.br"},
+            {number: 63, name: "MIRELLA BRITO DA SILVA", email: "00001122266224SP@al.educacao.sp.gov.br"},
+            {number: 64, name: "CARLOS EDUARDO MARTINS DA SILVA", email: "00001141492003SP@al.educacao.sp.gov.br"},
+            {number: 66, name: "STELLA MARTINS DA SILVA", email: "0000112231937XSP@al.educacao.sp.gov.br"},
+            {number: 67, name: "DYESSICA MAYARA DOS SANTOS GOMES", email: "00001141700888SP@al.educacao.sp.gov.br"},
+            {number: 68, name: "LARISSA DE LOURDES DOS SANTOS", email: "00001122136869SP@al.educacao.sp.gov.br"},
+            {number: 70, name: "GUSTAVO RODRIGUES DE SOUZA", email: "00001132106084SP@al.educacao.sp.gov.br"},
+            {number: 72, name: "NAYARA BARROS DE MORAIS", email: "00001141532232SP@al.educacao.sp.gov.br"},
+            {number: 73, name: "VITÓRIA SANTOS TEIXEIRA", email: "00001111267923SP@al.educacao.sp.gov.br"},
+            {number: 74, name: "BRUNA VITORIA DA MOTA OLIVEIRA", email: "00001104893149SP@al.educacao.sp.gov.br"},
+            {number: 75, name: "JOÃO PAULO RODRIGUES DE SOUZA FILHO", email: "00001122178013SP@al.educacao.sp.gov.br"},
+            {number: 76, name: "MARIA EDUARDA DE OLIVEIRA RODRIGUES", email: "00001122177574SP@al.educacao.sp.gov.br"},
+            {number: 77, name: "LUIZ HENRIQUE JESUS DOS SANTOS FABRICIO", email: "00001101285746SP@al.educacao.sp.gov.br"},
+            {number: 78, name: "EDUARDO CARRASCOSA PINTOR", email: "00001132133828SP@al.educacao.sp.gov.br"},
+            {number: 79, name: "GUILHERME DANIEL VELOSO DOS SANTOS", email: "00001132176281SP@al.educacao.sp.gov.br"},
+            {number: 80, name: "JOAO GABRIEL AMORIM TOBIAS", email: "00001141428611SP@al.educacao.sp.gov.br"},
+            {number: 81, name: "RIAN SANTOS MACHADO", email: "00001132118074SP@al.educacao.sp.gov.br"},
+            {number: 82, name: "JULIA ARAUJO DE LIMA", email: "00001101366886SP@al.educacao.sp.gov.br"},
+            {number: 83, name: "BRENDA ROSA DA SILVA", email: "00001122135452SP@al.educacao.sp.gov.br"},
+            {number: 84, name: "CAMILA APPOLINÁRIO", email: "00001122096380SP@al.educacao.sp.gov.br"}
+        ];
+
 
     const questions = [
       {
-        id: 1,
-        question: "No Jogo dos Quatis, ... qual foi o impacto?",
-        alternatives: [
-          "Aumento de 1 indivíduo...", 
-          "Diminuição de 1 indivíduo...", 
-          "Aumento de 6 indivíduos...",
-          "Diminuição de 3 indivíduos...",
-          "Não houve alteração..."
-        ],
-        correct: 0,
-        feedback: "O aumento na população de sapos representa..."
-      }
-      // (...adicione as outras questões)
-    ];
+      // Banco de questões (10 para exemplo)
+        const questions = [
+            {
+                id: 1,
+                question: "No Jogo dos Quatis, os estudantes simularam a variação populacional de quatis ao longo de gerações, considerando eventos ambiental. Na 3ª geração, calor e chuva prolongadas aumentaram a população de sapos, que se alimentam de insetos frugívoros. Considerando que os quatis se alimentam de sapos e insetos, qual foi o impacto na população de quatis e por quê?",
+                alternatives: [
+                    "Aumento de 1 indivíduo, porque houve aumento na disponibilidade de alimento para os quatis.",
+                    "Diminuição de 1 indivíduo, porque os sapos competem com os quatis pelos insetos.",
+                    "Aumento de 6 indivíduos, porque a chuva favoreceu a reprodução dos quatis.",
+                    "Diminuição de 3 indivíduos, porque a chuva causou inundações.",
+                    "Não houve alteração, porque o evento não afetou diretamente os quatis."
+                ],
+                correct: 0,
+                feedback: "O aumento na população de sapos representa mais alimento disponível para os quatis, que são onívoros e se alimentam tanto de sapos quanto de insetos. Por isso, a população de quatis aumentou em 1 indivíduo."
+            },
+            {
+                id: 2,
+                question: "Os ciclos do carbono, oxigênio e água estão integrados em processos biológicos. Durante a fotossíntese, qual é a participação de cada ciclo?",
+                alternatives: [
+                    "Ciclo da água: a água é utilizada como fonte de elétrons e hidrogênio; Ciclo do oxigênio: o oxigênio é liberado; Ciclo do carbono: o dióxido de carbono é absorvido e convertido em glicose.",
+                    "Ciclo da água: a água é produzida; Ciclo do oxigênio: o oxigênio é consumido; Ciclo do carbono: o carbono é liberado na forma de CO₂.",
+                    "Ciclo da água: a água é decomposta em hidrogênio e oxigênio; Ciclo do oxigênio: o oxigênio é fixado; Ciclo do carbono: o carbono é transformado em metano.",
+                    "Ciclo da água: a água é transpirada; Ciclo do oxigênio: o oxigênio é utilizado na respiração; Ciclo do carbono: o carbono é fixado por bactérias.",
+                    "Ciclo da água: a água é absorvida pelas raízes; Ciclo do oxigênio: o oxigênio é liberado na respiração; Ciclo do carbono: o carbono é liberado na decomposição."
+                ],
+                correct: 0,
+                feedback: "Na fotossíntese, a água é utilizada como fonte de elétrons e hidrogênio, o oxigênio é liberado como subproduto, e o dióxido de carbono é absorvido e convertido em glicose, integrando os três ciclos biogeoquímicos."
+            },
+            {
+                id: 3,
+                question: "Um agricultor utilizou fertilizantes nitrogenados inorgânicos em sua lavoura. Após algumas safras, o solo ficou mais ácido e rios próximos apresentaram proliferação de algas. Qual é a explicação para esses fenômenos?",
+                alternatives: [
+                    "Os fertilizantes inorgânicos aumentam a taxa de desnitrificação, liberando N₂ para a atmosfera.",
+                    "O excesso de nitrogênio no solo é lixiviado para corpos d'água, causando eutrofização.",
+                    "Os fertilizantes orgânicos serían mais adequados porque não alteram o pH do suelo.",
+                    "A amonificação realizada por bactérias é inibida por fertilizantes inorgânicos.",
+                    "O nitrogênio inorgânico não é absorvido pelas plantas, acumulando-se no solo."
+                ],
+                correct: 1,
+                feedback: "O excesso de fertilizantes nitrogenados pode ser lixiviado para corpos d'água, causando eutrofização. Este processo promove o crescimento excessivo de algas, que ao serem decompostas, consomem oxigênio, podendo levar à morte de organismos aquáticos."
+            },
+            {
+                id: 4,
+                question: "Em uma plenária sobre o uso de fertilizantes, um grupo defendeu os fertilizantes orgânicos e outro os inorgânicos. Quais são as vantagens dos fertilizantes orgânicos em relação aos inorgânicos?",
+                alternatives: [
+                    "Liberação imediata de nutrientes e alta concentração de nitrogênio.",
+                    "Melhoria da estrutura do solo, liberação gradual de nutrientes e promoção da atividade microbiana.",
+                    "Não alteram o pH do solo e são mais baratos.",
+                    "São mais eficientes na fixação biológica de nitrogênio.",
+                    "Não causam eutrofização em corpos d'água, mesmo quando usados em excesso."
+                ],
+                correct: 1,
+                feedback: "Fertilizantes orgânicos melhoram a estrutura do solo, liberam nutrientes gradualmente e promovem a atividade microbiana benéfica, diferentemente dos fertilizantes inorgânicos que podem causar acidificação do solo e poluição hídrica."
+            },
+            {
+                id: 5,
+                question: "Dois lagos foram monitorados quanto a parâmetros de qualidade de água. O Lago A apresentou: nitrogênio (0,5 mg/L), fósforo (0,03 mg/L), oxigênio dissolvido (8,0 mg/L), biomassa de algas (5,0 mg/m³). O Lago B apresentou: nitrogênio (5,0 mg/L), fósforo (0,5 mg/L), oxigênio dissolvido (2,0 mg/L), biomassa de algas (150,0 mg/m³). Qual lago está eutrofizado e qual a principal causa da redução de oxigênio dissolvido?",
+                alternatives: [
+                    "Lago A - devido à alta taxa de fotossíntese.",
+                    "Lago B - devido à decomposição de matéria orgânica por bactérias aeróbicas.",
+                    "Lago A - devido ao excesso de nutrientes.",
+                    "Lago B - devido à baixa incidência de luz.",
+                    "Lago A - devido à alta taxa de respiração das algas."
+                ],
+                correct: 1,
+                feedback: "O Lago B apresenta sinais de eutrofização com altos níveis de nutrientes (fósforo e nitrogênio) e alta biomassa de algas. A redução do oxigênio dissolvido ocorre devido ao consumo por bactérias aeróbicas durante a decomposição da matéria orgânica resultante da floração algal."
+            },
+            {
+                id: 6,
+                question: "Em 2024, a Baixada Santista teve a venda de moluscos suspensa devido à contaminação por toxinas de microalgas. Esse fenômeno, conhecido como maré vermelha, foi atribuído ao despejo de esgoto e ao aquecimento global. Qual é um impacto econômico direto desse evento?",
+                alternatives: [
+                    "Aumento do turismo na região.",
+                    "Redução da pesca e do comércio de frutos do mar.",
+                    "Diminuição da salinidade da água do mar.",
+                    "Aumento da biodiversidade marinha.",
+                    "Intensificação da fotossíntese fitoplanctônica."
+                ],
+                correct: 1,
+                feedback: "A maré vermelha causa contaminação de frutos do mar por toxinas, levando à suspensão da pesca e comercialização desses produtos. Isso resulta em impacts econômicos diretos para pescadores e comerciantes da região afetada."
+            },
+            {
+                id: 7,
+                question: "Em uma cadeia alimentar representada por goiabeira → quatis → onças, os dados de energia foram: goiabeira (1000 kcal), quatis (500 kcal), onças (200 kcal). Qual pirâmide de energia melhor representa essa situação?",
+                alternatives: [
+                    "Pirâmide invertida, porque a energia aumenta a cada nível trófico.",
+                    "Pirâmide ereta com base larga, porque a energia diminui a cada nível trófico.",
+                    "Pirâmide de números, porque o número de indivíduos diminui.",
+                    "Pirâmide de biomassa invertida, porque a biomassa dos produtores é menor.",
+                    "Não é possível construir uma pirâmide de energia com esses dados."
+                ],
+                correct: 1,
+                feedback: "A pirâmide de energia é sempre ereta, pois a energia diminui a cada nível trófico (cerca de 90% é perdida) devido a processos metabólicos, como respiração, e perda de calor. Esta é uma das leis da termodinâmica aplicada aos ecossistemas."
+            },
+            {
+                id: 8,
+                question: "Como o nitrogênio, originalmente fixado por bactérias no solo, chega até um animal carnívoro, como uma onça?",
+                alternatives: [
+                    "Diretamente pela absorção de nitrato do solo pela onça.",
+                    "Pela cadeia alimentar: plantas absorvem nitrato, herbívoros comem plantas, carnívoros comem herbívoros.",
+                    "Pela respiração, absorvendo nitrogênio atmosférico.",
+                    "Pela desnitrificação, que libera nitrogênio gasoso para a atmosfera.",
+                    "Pela amonificação, que transforma nitrogênio orgânico em amônia."
+                ],
+                correct: 1,
+                feedback: "O nitrogênio fixado por bactérias é absorvido pelas plantas na forma de nitratos, transformado em compostos orgânicos, e transferido através da cadeia alimentar para herbívoros e depois para carnívoros como a onça."
+            },
+            {
+                id: 9,
+                question: "A rotação de culturas com leguminosas é uma prática agrícola que visa a sustentabilidade. Por que as leguminosas são escolhidas para essa prática?",
+                alternatives: [
+                    "Porque elas não necessitam de nitrogênio para crescer.",
+                    "Porque elas possuem bactérias em suas raízes que fixam nitrogênio atmosférico, enriquecendo o solo.",
+                    "Porque elas absorvem nitrogênio do ar através das folhas.",
+                    "Porque elas liberam oxigênio durante a fotossíntese, melhorando a qualidade do ar.",
+                    "Porque elas têm raízes profundas que impedem a lixiviação."
+                ],
+                correct: 1,
+                feedback: "As leguminosas estabelecem simbiose com bactérias do gênero Rhizobium, que fixam nitrogênio atmosférico, convertendo-o em formas assimiláveis pelas plantas e enriquecendo o solo com compostos nitrogenados."
+            },
+            {
+                id: 10,
+                question: "Em um lago eutrofizado, observa-se que os peixes nadam próximos à superfície. Qual a explicação para esse comportamento?",
+                alternatives: [
+                    "Proliferação de microrganismos patogênicos, o que promove sua fuga para a superfície.",
+                    "Aumento da quantidade de nutrientes, o que facilita a sua alimentação.",
+                    "Elevação da densidade da água, o que dificulta o deslocamento vertical.",
+                    "Restrição de oxigênio, o que os obriga a buscar o gás na interface água-ar.",
+                    "Redução da luminosidade, o que os impede de enxergar."
+                ],
+                correct: 3,
+                feedback: "Na eutrofização, a decomposição da matéria orgânica consome oxigênio dissolvido na água, criando zonas anóxicas. Os peixes nadam próximo à superfície para acessar oxigênio atmosférico na interface água-ar."
+            }
+        ];
+
+
 
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxfQZqBIhFhIVqho2vpreBaYEgL43Hka2E9-5qiPiAiy_seEXNeDaKe5Z8xrkgrTJ60/exec";
 
@@ -283,3 +448,4 @@
   </script>
 </body>
 </html>
+
