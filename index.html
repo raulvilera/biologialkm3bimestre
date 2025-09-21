@@ -175,6 +175,27 @@
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
         }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #0066cc;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -221,6 +242,11 @@
         <div class="buttons">
             <button id="submit-btn">Enviar Respostas</button>
             <button id="reset-btn">Limpar Tudo</button>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Enviando respostas para o Google Sheets...</p>
         </div>
         
         <div id="results" class="results">
@@ -316,7 +342,7 @@
                 alternatives: [
                     "Os fertilizantes inorgânicos aumentam a taxa de desnitrificação, liberando N₂ para a atmosfera.",
                     "O excesso de nitrogênio no solo é lixiviado para corpos d'água, causando eutrofização.",
-                    "Os fertilizantes orgânicos serían mais adequados porque não alteram o pH do solo.",
+                    "Os fertilizantes orgânicos serían mais adequados porque não alteram o pH do suelo.",
                     "A amonificação realizada por bactérias é inibida por fertilizantes inorgânicos.",
                     "O nitrogênio inorgânico não é absorvido pelas plantas, acumulando-se no solo."
                 ],
@@ -360,7 +386,7 @@
                     "Intensificação da fotossíntese fitoplanctônica."
                 ],
                 correct: 1,
-                feedback: "A maré vermelha causa contaminação de frutos do mar por toxinas, levando à suspensão da pesca e comercialização desses produtos. Isso resulta em impactos econômicos diretos para pescadores e comerciantes da região afetada."
+                feedback: "A maré vermelha causa contaminação de frutos do mar por toxinas, levando à suspensão da pesca e comercialização desses produtos. Isso resulta em impacts econômicos diretos para pescadores e comerciantes da região afetada."
             },
             {
                 id: 7,
@@ -420,6 +446,9 @@
         let selectedQuestions = [];
         let studentAnswers = {};
         let currentStudent = null;
+
+        // URL do Google Apps Script Web App
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwz3M9K7Hp1X3UqX8mG3k2Q1Z1X1Z1X1Z1X1Z1X1Z1X1Z1X1Z1/exec";
 
         // Função para inicializar a atividade
         function initActivity() {
@@ -538,18 +567,30 @@
             // Calcular pontuação
             const score = calculateScore(selectedQuestions, studentAnswers);
             
-            // Exibir resultados
-            document.getElementById('score-value').textContent = score;
-            document.getElementById('results').style.display = 'block';
+            // Mostrar loading
+            document.getElementById('loading').style.display = 'block';
             
-            // Gerar feedback
-            generateFeedback(selectedQuestions, studentAnswers);
-            
-            // Rolagem para os resultados
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-            
-            // Enviar dados para o Google Sheets (simulado)
-            sendDataToGoogleSheets(score);
+            // Enviar dados para o Google Sheets
+            sendDataToGoogleSheets(score)
+                .then(() => {
+                    // Esconder loading
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    // Exibir resultados
+                    document.getElementById('score-value').textContent = score;
+                    document.getElementById('results').style.display = 'block';
+                    
+                    // Gerar feedback
+                    generateFeedback(selectedQuestions, studentAnswers);
+                    
+                    // Rolagem para os resultados
+                    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar dados:', error);
+                    document.getElementById('loading').style.display = 'none';
+                    alert('Erro ao enviar respostas. Por favor, tente novamente.');
+                });
         }
 
         // Calcular pontuação
@@ -599,16 +640,45 @@
             studentAnswers = {};
         }
 
-        // Função para enviar dados para o Google Sheets (simulada)
-        function sendDataToGoogleSheets(score) {
-            // Em uma implementação real, isso enviaria os dados para o Google Sheets
-            console.log('Dados enviados para o Google Sheets:');
-            console.log('Aluno:', currentStudent);
-            console.log('Pontuação:', score);
-            console.log('Respostas:', studentAnswers);
+        // Função para enviar dados para o Google Sheets
+        async function sendDataToGoogleSheets(score) {
+            if (!currentStudent) {
+                throw new Error('Nenhum aluno selecionado');
+            }
             
-            // Esta é uma simulação - na implementação real, usaria Google Apps Script
-            alert('Respostas enviadas com sucesso! Os resultados foram registrados.');
+            // Preparar os dados para envio
+            const formData = new FormData();
+            formData.append('studentName', currentStudent.name);
+            formData.append('studentNumber', currentStudent.number);
+            formData.append('studentEmail', currentStudent.email);
+            formData.append('score', score);
+            formData.append('answers', JSON.stringify(studentAnswers));
+            formData.append('date', new Date().toLocaleDateString('pt-BR'));
+            formData.append('sheetId', '1yGahAlt7tnGbqhv5auMQyNqpIoPg7bYQI34EdGWXUbo');
+            formData.append('sheetName', '1ºH');
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor');
+                }
+                
+                const result = await response.text();
+                console.log('Resposta do Google Apps Script:', result);
+                
+                if (result !== 'Success') {
+                    throw new Error('Erro ao processar dados no Google Sheets');
+                }
+                
+                return result;
+            } catch (error) {
+                console.error('Erro ao enviar dados para o Google Sheets:', error);
+                throw error;
+            }
         }
 
         // Inicializar a atividade quando o documento estiver carregado
