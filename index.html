@@ -51,12 +51,17 @@
         
         .student-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(5, auto);
             gap: 15px;
+            align-items: end;
         }
         
         .info-group {
-            margin-bottom: 10px;
+            margin-bottom: 0;
+        }
+        
+        .info-group.full-width {
+            grid-column: 1 / -1;
         }
         
         label {
@@ -64,6 +69,7 @@
             margin-bottom: 5px;
             font-weight: bold;
             font-size: 0.9em;
+            white-space: nowrap;
         }
         
         select, input {
@@ -72,18 +78,29 @@
             border-radius: 5px;
             font-size: 0.95em;
             background-color: white;
-            min-width: 50px;
-            width: 100%;
+            height: 40px;
         }
         
-        /* Ajuste para o campo de nome se expandir conforme o conteúdo */
         #student-name {
-            width: auto;
-            min-width: 250px;
+            width: 100%;
+            min-width: 280px;
+        }
+        
+        #student-number {
+            width: 70px;
+        }
+        
+        #student-class {
+            width: 100px;
+        }
+        
+        #activity-date, #student-email {
+            width: 100%;
         }
         
         select {
             cursor: pointer;
+            appearance: menulist;
         }
         
         select:focus, input:focus {
@@ -254,9 +271,23 @@
             border-left: 4px solid #2e7d32;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .student-info {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .info-group.full-width {
+                grid-column: 1 / -1;
+            }
+        }
+        
+        @media (max-width: 600px) {
             .student-info {
                 grid-template-columns: 1fr;
+            }
+            
+            #student-name, #student-number, #student-class, #activity-date, #student-email {
+                width: 100%;
             }
             
             .buttons {
@@ -266,11 +297,6 @@
             
             button {
                 width: 100%;
-            }
-            
-            #student-name {
-                width: 100%;
-                min-width: unset;
             }
         }
     </style>
@@ -282,7 +308,7 @@
             <div class="activity-title">ATIVIDADE DE BIOLOGIA (3º BIMESTRE)<br>REVISÃO DOS TEMAS</div>
             
             <div class="student-info">
-                <div class="info-group">
+                <div class="info-group full-width">
                     <label for="student-name">NOME:</label>
                     <select id="student-name">
                         <option value="">Selecione seu nome</option>
@@ -445,7 +471,7 @@
                     "Não causam eutrofização em corpos d'água, mesmo quando usados em excesso."
                 ],
                 correct: 1,
-                feedback: "Fertilizantes orgânicos melhoram a estrutura do solo, liberam nutrientes gradualmente e promovem a atividade microbiana benéfica, diferentemente dos fertilizantes inorgânicos que podem causar acidificação do solo e poluição hídrica."
+                feedback: "Fertilizantes orgânicos melhoram a estrutura do suelo, liberam nutrientes gradualmente e promovem a atividade microbiana benéfica, diferentemente dos fertilizantes inorgânicos que podem causar acidificação do solo e poluição hídrica."
             },
             {
                 id: 5,
@@ -560,9 +586,6 @@
             document.getElementById('student-name').addEventListener('change', handleStudentSelection);
             document.getElementById('submit-btn').addEventListener('click', handleSubmit);
             document.getElementById('reset-btn').addEventListener('click', handleReset);
-            
-            // Ajustar o tamanho do dropdown de alunos
-            adjustSelectWidth();
         }
 
         // Função para exibir questões na página
@@ -590,36 +613,6 @@
                 
                 container.appendChild(questionElement);
             });
-        }
-
-        // Ajustar a largura do select baseado no conteúdo
-        function adjustSelectWidth() {
-            const select = document.getElementById('student-name');
-            const tempSelect = document.createElement('select');
-            const tempOption = document.createElement('option');
-            
-            // Adicionar a opção mais longa para medir
-            let longestText = '';
-            students.forEach(student => {
-                if (student.name.length > longestText.length) {
-                    longestText = student.name;
-                }
-            });
-            
-            tempOption.textContent = longestText;
-            tempSelect.appendChild(tempOption);
-            
-            // Estilizar o select temporário igual ao original
-            tempSelect.style.position = 'absolute';
-            tempSelect.style.visibility = 'hidden';
-            tempSelect.style.font = getComputedStyle(select).font;
-            document.body.appendChild(tempSelect);
-            
-            // Ajustar a largura do select original
-            select.style.width = `${tempSelect.scrollWidth + 30}px`;
-            
-            // Remover o select temporário
-            document.body.removeChild(tempSelect);
         }
 
         // Manipular seleção de aluno
@@ -793,4 +786,3 @@
     </script>
 </body>
 </html>
-
